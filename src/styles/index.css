@@ -3,11 +3,6 @@ body {
   padding: 0;
 }
 
-.login {
-  display: flex;
-  flex-direction: column;
-}
-
 .center-center {
   display: flex;
   justify-content: center;
