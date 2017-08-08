@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
+import RecipeForm from './components/RecipeForm';
 
 
 import reducers from './reducers';
@@ -23,6 +24,7 @@ ReactDOM.render(
         <Route exact path="/" component={HomePage} />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
+        <Route path="/add" component={RecipeForm} />
       </Switch>
     </BrowserRouter>
 

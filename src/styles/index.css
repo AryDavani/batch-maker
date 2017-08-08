@@ -3,8 +3,41 @@ body {
   padding: 0;
 }
 
+/* materialize changes */
+
+/* label color */
+ .input-field label {
+   color: black;
+ }
+ /* label focus color */
+ .input-field input[type=text]:focus + label {
+   color: #000;
+ }
+ /* label underline focus color */
+ .input-field input[type=text]:focus {
+   border-bottom: 1px solid #000;
+   box-shadow: 0 1px 0 0 #000;
+ }
+
 .center-center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.flexed {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.logo {
+  width: 30%;
+}
+
+ul li {
+  list-style: none;
+}
+input {
+  margin: 10px;
 }
