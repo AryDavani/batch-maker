@@ -29,9 +29,17 @@ export function getRecipes() {
 // action to add recipe to db
 
 export function addRecipe(recipe) {
+  let newRecipe = fetch(URL, {
+      method: "POST",
+      body: JSON.stringify(object),
+      headers: HEADERS
+    }).then((response) => {
+      response.json();
+    });
+
   return {
     type: ADD_RECIPE,
-    payload: recipe
+    payload: newRecipe
   }
 }
 
