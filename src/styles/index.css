@@ -3,21 +3,10 @@ body {
   padding: 0;
 }
 
-/* materialize changes */
-
-/* label color */
- .input-field label {
-   color: black;
- }
- /* label focus color */
- .input-field input[type=text]:focus + label {
-   color: #000;
- }
- /* label underline focus color */
- .input-field input[type=text]:focus {
-   border-bottom: 1px solid #000;
-   box-shadow: 0 1px 0 0 #000;
- }
+h1 {
+  color: #F5F5F5;
+  text-shadow: 0px 0px 60px black;
+}
 
 .center-center {
   display: flex;
@@ -34,10 +23,15 @@ body {
 .logo {
   width: 30%;
 }
-
+#recipeForm {
+  height: 100vh;
+  background-image: url('https://www.saga.co.uk/contentlibrary/saga/publishing/verticals/food/hero-and-hub/food/recipes-hero-1260x600.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 ul li {
   list-style: none;
 }
-input {
+input, select, label, textarea, button {
   margin: 10px;
 }
