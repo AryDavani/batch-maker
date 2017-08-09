@@ -29,17 +29,26 @@ export default class RecipeForm extends Component {
     }
 
     this._handleChange = this._handleChange.bind(this);
-    // this._handleFormSubmit = this._handleFormSubmit.bind(this);
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
 
 
   _handleChange(event){
+    console.log(event.target.value);
     let name = event.target.name;
-    if (name === "amount") {
-      console.log("you clicked amount");
+    let object = {};
+
+    if (name === "directions") {
+      
+    } else {
+
     }
   }
 
+  _handleFormSubmit(event){
+    event.preventDefault();
+    console.log("form submitted");
+  }
 
 
   render(){
@@ -51,52 +60,46 @@ export default class RecipeForm extends Component {
 
             <span className="form-inline">
               <label>Recipe Name</label>
-              <input onChange={ this._handleChange } name="recipeName" className="form-control" type="text" placeholder="Recipe Name" />
+              <input name="recipeName" className="form-control" type="text" placeholder="Recipe Name" />
               <label>Author</label>
               <input className="form-control" type="text" placeholder="Author" />
             </span>
 
             <div className="form-inline">
-
               <span>
-                <select className="form-control">
+                <select onChange={ this._handleChange } className="form-control">
                   <option selected>Recipe Type</option>
-                  <option value="1">Pasta</option>
-                  <option value="2">Salad</option>
-                  <option value="3">Breads</option>
-                  <option value="4">Soup</option>
-                  <option value="5">Roast</option>
-                  <option value="6">Sandwich</option>
-                  <option value="7">Dessert</option>
-                  <option value="8">Sauces</option>
+                  <option value="pasta">Pasta</option>
+                  <option value="salad">Salad</option>
+                  <option value="bread">Bread</option>
+                  <option value="soup">Soup</option>
+                  <option value="roast">Roast</option>
+                  <option value="sandwich">Sandwich</option>
+                  <option value="dessert">Dessert</option>
+                  <option value="sauce">Sauce</option>
                 </select>
               </span>
 
-              <span className="">
+              <span>
                 <input className="form-control" type="number" placeholder="Prep Time (minutes)" />
               </span>
 
-              <span className="">
+              <span>
                 <input className="form-control" type="number" placeholder="Cook Time (minutes)" />
               </span>
 
-              <span className="">
+              <span>
                 <input className="form-control" type="number" placeholder="Cook Temp (F)" />
               </span>
-
             </div>
 
             <div className="form-inline">
-
               <label>This recipe will make</label>
               <input className="form-control" type="number" placeholder="Amount" />
               <input className="form-control" type="text" placeholder="cookies, loaves, ect." />
-
-
             </div>
 
             <div className="form-inline">
-
               <input onChange={ this._handleChange } name="amount" className="form-control" type="number" placeholder="Amount" />
 
               <select onChange={ this._handleChange } name="unit" className="form-control">
@@ -108,12 +111,13 @@ export default class RecipeForm extends Component {
               </select>
 
               <input onChange={ this._handleChange } name="name" className="form-control" type="text" placeholder="Ingredient Name" />
-
             </div>
 
-            <textarea className="form-control" rows="3" placeholder="What directions go with this step?"></textarea>
 
-            <button className="btn btn-default">Add Another Step</button>
+            <textarea onChange={ this._handleChange } name="directions" className="form-control" rows="3" placeholder="What directions go with this step?"></textarea>
+
+
+            <button className="btn btn-default" type="button">Add Another Step</button>
 
             <div>
               <hr/>

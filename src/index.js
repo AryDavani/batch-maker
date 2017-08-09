@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import Thunk from 'redux-thunk';
+import ReduxPromise from 'redux-promise';
 
 import HomePage from './components/HomePage';
 import LoginForm from './components/LoginForm';
@@ -15,7 +17,7 @@ import reducers from './reducers';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const createStoreWithMiddleware = applyMiddleware(Thunk)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>

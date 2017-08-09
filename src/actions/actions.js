@@ -5,7 +5,7 @@ import {
   UPDATE_RECIPE
 } from './types';
 
-const URL = "https://lill-parse-server.herokuapp.com//classes/AryRecipe";
+const URL = "https://lill-parse-server.herokuapp.com";
 const HEADERS = {
   "X-Parse-Master-Key": "learntocode",
   "X-Parse-Application-Id": "tiygvl"
@@ -31,7 +31,7 @@ export function getRecipes() {
 export function addRecipe(recipe) {
   let newRecipe = fetch(URL, {
       method: "POST",
-      body: JSON.stringify(object),
+      body: JSON.stringify(recipe),
       headers: HEADERS
     }).then((response) => {
       response.json();
@@ -59,4 +59,25 @@ export function updateRecipe(recipe) {
     type: UPDATE_RECIPE,
     payload: recipe
   }
+}
+
+// action to signup
+
+export function signup(user) {
+  console.log('user', user);
+  return function() {
+    fetch(`${URL}/users`, {
+      method: "POST",
+      body: user,
+      headers: HEADERS
+    }).then((response) => {
+      console.log(response);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+}
+
+export function login(user) {
+  
 }
