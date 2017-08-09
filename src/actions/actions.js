@@ -28,7 +28,7 @@ export function getRecipes() {
 // action to add recipe to db
 
 export function addRecipe(recipe) {
-  let newRecipe = fetch(`${URL}/classes/AryRecipe`, {
+  fetch(`${URL}/classes/AryRecipe`, {
       method: "POST",
       body: JSON.stringify(recipe),
       headers: HEADERS
@@ -38,7 +38,7 @@ export function addRecipe(recipe) {
 
   return {
     type: ADD_RECIPE,
-    payload: newRecipe
+    payload: recipe
   }
 }
 

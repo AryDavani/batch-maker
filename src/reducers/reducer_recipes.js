@@ -9,16 +9,16 @@ let RECIPES = fetch(URL, { headers: HEADERS}).then((response) => {
   response.json().then((result) => {
     console.log('data', result);
     return result;
-  })
+  });
 })
 
-export default function(state=RECIPES, action) {
+export default function( state = RECIPES, action ) {
   switch (action.type) {
     case GET_RECIPES:
       return state;
 
     case ADD_RECIPE:
-      return state;
+      return [ ...state , action.payload ]
 
     case DELETE_RECIPE:
       return state;

@@ -24,15 +24,12 @@ export default class RecipeForm extends Component {
 
 
   _handleChange(event){
-    console.log(event.target.value);
+    console.log("name", event.target.name);
+    console.log("value", event.target.value);
     let name = event.target.name;
     let object = {};
-
-    // if (name === "directions") {
-    //
-    // } else {
-    //
-    // }
+    object[event.target.name] = event.target.value;
+    console.log(object);
   }
 
   _handleFormSubmit(event){
