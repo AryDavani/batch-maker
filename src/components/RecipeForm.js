@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {URL, HEADERS} from '../actions/types';
 
 export default class RecipeForm extends Component {
   constructor() {
@@ -11,20 +12,9 @@ export default class RecipeForm extends Component {
       // prepTime: 0,
       // cookTime: 0,
       // cookTemp: 0,
-      // amount: 0,
+      // quantity: 0,
       // amountUnit: '',
-      steps: [
-        {
-          ingredients: [
-            {
-              amount: 0,
-              unit: '',
-              name: ''
-            }
-          ],
-          directions: ''
-        }
-      ]
+      steps: []
       // notes: ''
     }
 
@@ -38,16 +28,42 @@ export default class RecipeForm extends Component {
     let name = event.target.name;
     let object = {};
 
-    if (name === "directions") {
-      
-    } else {
-
-    }
+    // if (name === "directions") {
+    //
+    // } else {
+    //
+    // }
   }
 
   _handleFormSubmit(event){
     event.preventDefault();
     console.log("form submitted");
+
+    let object = {
+      recipeName: event.target.recipeName.value,
+      author: event.target.author.value,
+      recipeType: event.target.recipeType.value,
+      prepTime: Number(event.target.prepTime.value),
+      cookTime: Number(event.target.cookTime.value),
+      cookTemp: Number(event.target.cookTemp.value),
+      quantity: Number(event.target.quantity.value),
+      amountUnit: event.target.amountUnit.value,
+      steps: [],
+      notes: event.target.notes.value
+    };
+    console.log(object);
+
+    fetch(`${URL}/classes/AryRecipe`, {
+        method: "POST",
+        body: JSON.stringify(object),
+        headers: HEADERS
+      }).then((response) => {
+        console.log("response", response);
+      }).catch(err => {
+        console.log("error", err);
+    });
+
+    event.target.reset();
   }
 
 
@@ -62,12 +78,12 @@ export default class RecipeForm extends Component {
               <label>Recipe Name</label>
               <input name="recipeName" className="form-control" type="text" placeholder="Recipe Name" />
               <label>Author</label>
-              <input className="form-control" type="text" placeholder="Author" />
+              <input name="author" className="form-control" type="text" placeholder="Author" />
             </span>
 
             <div className="form-inline">
               <span>
-                <select onChange={ this._handleChange } className="form-control">
+                <select onChange={ this._handleChange } name="recipeType" className="form-control">
                   <option selected>Recipe Type</option>
                   <option value="pasta">Pasta</option>
                   <option value="salad">Salad</option>
@@ -81,22 +97,22 @@ export default class RecipeForm extends Component {
               </span>
 
               <span>
-                <input className="form-control" type="number" placeholder="Prep Time (minutes)" />
+                <input name="prepTime" className="form-control" type="number" placeholder="Prep Time (minutes)" />
               </span>
 
               <span>
-                <input className="form-control" type="number" placeholder="Cook Time (minutes)" />
+                <input name="cookTime" className="form-control" type="number" placeholder="Cook Time (minutes)" />
               </span>
 
               <span>
-                <input className="form-control" type="number" placeholder="Cook Temp (F)" />
+                <input name="cookTemp" className="form-control" type="number" placeholder="Cook Temp (F)" />
               </span>
             </div>
 
             <div className="form-inline">
               <label>This recipe will make</label>
-              <input className="form-control" type="number" placeholder="Amount" />
-              <input className="form-control" type="text" placeholder="cookies, loaves, ect." />
+              <input name="quantity" className="form-control" type="number" placeholder="Quantity" />
+              <input name="amountUnit" className="form-control" type="text" placeholder="cookies, loaves, ect." />
             </div>
 
             <div className="form-inline">
@@ -122,7 +138,7 @@ export default class RecipeForm extends Component {
             <div>
               <hr/>
               <label>Personal Notes:</label>
-              <textarea className="form-control" rows="3"></textarea>
+              <textarea name="notes" className="form-control" rows="3"></textarea>
             </div>
 
             <button className="btn btn-default" type="submit">Save Recipe!</button>

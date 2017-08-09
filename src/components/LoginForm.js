@@ -10,6 +10,14 @@ class LoginForm extends Component {
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
 
+  componentWillMount(){
+    this.props.authenticated ? this.props.history.push('/') : null
+  }
+
+  componentWillReceiveProps(nextProps) {
+    nextProps.authenticated ? this.props.history.push('/') : null
+  }
+
   _handleFormSubmit(event){
     event.preventDefault();
 
@@ -46,8 +54,14 @@ class LoginForm extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated
+  }
+}
+
 function mapDispatchToProps(dispatch){
   return bindActionCreators({login}, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

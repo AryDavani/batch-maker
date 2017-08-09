@@ -4,14 +4,11 @@ import {
   ADD_RECIPE,
   DELETE_RECIPE,
   UPDATE_RECIPE,
-  AUTH_USER
+  AUTH_USER,
+  URL,
+  HEADERS
 } from './types';
 
-const URL = "https://lill-parse-server.herokuapp.com";
-const HEADERS = {
-  "X-Parse-Master-Key": "learntocode",
-  "X-Parse-Application-Id": "tiygvl"
-};
 
 // action to get the recipes from db
 
@@ -31,7 +28,7 @@ export function getRecipes() {
 // action to add recipe to db
 
 export function addRecipe(recipe) {
-  let newRecipe = fetch(URL, {
+  let newRecipe = fetch(`${URL}/classes/AryRecipe`, {
       method: "POST",
       body: JSON.stringify(recipe),
       headers: HEADERS
