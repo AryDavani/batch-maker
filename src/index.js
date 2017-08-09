@@ -11,6 +11,7 @@ import HomePage from './components/HomePage';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import RecipeForm from './components/RecipeForm';
+import CheckAuth from './components/checkAuth';
 
 
 import reducers from './reducers';
@@ -23,7 +24,7 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={CheckAuth(HomePage)} />
         <Route path="/login" component={LoginForm} />
         <Route path="/signup" component={SignupForm} />
         <Route path="/add" component={RecipeForm} />
