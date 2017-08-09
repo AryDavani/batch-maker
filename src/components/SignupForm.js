@@ -30,7 +30,7 @@ class SignupForm extends Component {
           <form onSubmit={ this._handleFormSubmit } className="col s12">
             <div className="row">
               <div className="form-inline input-field col s6">
-                <input name="username" type="text" className="form-control validate" />
+                <input name="username" type="email" className="form-control validate" />
                 <label>Username</label>
               </div>
               <div className="form-inline input-field col s6">

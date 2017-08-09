@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import {
   GET_RECIPES,
   ADD_RECIPE,
@@ -87,5 +88,17 @@ export function signup(user) {
 }
 
 export function login(user) {
-
+  return function(dispatch) {
+    fetch(`${URL}/login?${$.param(user)}`, { headers: HEADERS })
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      dispatch({ type: AUTH_USER });
+      localStorage.setItem('user', JSON.stringify(result));
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 }

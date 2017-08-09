@@ -6,20 +6,35 @@ import {login} from '../actions/actions.js';
 class LoginForm extends Component {
   constructor() {
     super();
+
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
   }
+
+  _handleFormSubmit(event){
+    event.preventDefault();
+
+    let object = {};
+    object['username'] = event.target.username.value;
+    object['password'] = event.target.password.value;
+
+    this.props.login(object);
+
+    event.target.reset();
+  }
+
   render(){
     return (
       <div className="row container center-center">
         <div>
           <h2>Login</h2>
-          <form className="col s12">
+          <form onSubmit={ this._handleFormSubmit } className="col s12">
             <div className="row">
               <div className="form-inline input-field col s6">
-                <input type="text" className="form-control validate" />
+                <input type="email" name="username" className="form-control validate" />
                 <label>Username</label>
               </div>
               <div className="form-inline input-field col s6">
-                <input type="password" className="form-control validate" />
+                <input type="password" name="password" className="form-control validate" />
                 <label>Password</label>
               </div>
             </div>
