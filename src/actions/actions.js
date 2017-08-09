@@ -2,7 +2,8 @@ import {
   GET_RECIPES,
   ADD_RECIPE,
   DELETE_RECIPE,
-  UPDATE_RECIPE
+  UPDATE_RECIPE,
+  AUTH_USER
 } from './types';
 
 const URL = "https://lill-parse-server.herokuapp.com";
@@ -62,22 +63,29 @@ export function updateRecipe(recipe) {
 }
 
 // action to signup
-
+// could refactor to return a boolean for a payload
 export function signup(user) {
   console.log('user', user);
-  return function() {
+  return function(dispatch) {
     fetch(`${URL}/users`, {
       method: "POST",
       body: user,
       headers: HEADERS
-    }).then((response) => {
-      console.log(response);
-    }).catch((err) => {
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      console.log('result', result);
+      dispatch({ type: AUTH_USER });
+      localStorage.setItem('user', JSON.stringify(result));
+    })
+    .catch((err) => {
       console.log(err);
     })
   }
 }
 
 export function login(user) {
-  
+
 }
