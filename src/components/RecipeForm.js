@@ -14,22 +14,36 @@ export default class RecipeForm extends Component {
       // cookTemp: 0,
       // quantity: 0,
       // amountUnit: '',
-      steps: []
+      steps: [],
+      ingredients: [],
       // notes: ''
     }
 
     this._handleChange = this._handleChange.bind(this);
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
+    this._handleAddIngredient = this._handleAddIngredient.bind(this);
   }
 
+  _handleAddIngredient(event){
+    let ingredients = this.state.ingredients;
+
+    let ingredient = {
+      amount: this.state.amount,
+      unit: this.state.unit,
+      name: this.state.name
+    };
+
+    ingredients.push(ingredient);
+
+    console.log("state here", this.state);
+  }
 
   _handleChange(event){
-    console.log("name", event.target.name);
-    console.log("value", event.target.value);
-    let name = event.target.name;
     let object = {};
     object[event.target.name] = event.target.value;
-    console.log(object);
+
+    this.setState(object);
+    console.log(this.state);
   }
 
   _handleFormSubmit(event){
@@ -63,8 +77,18 @@ export default class RecipeForm extends Component {
     event.target.reset();
   }
 
-
   render(){
+    let listOfIngredients = this.state.ingredients.map((item, index) => {
+      return (
+        <div key={ index }>
+          <span>{ item.amount }</span>
+          <span>{ item.unit }</span>
+          <span>{ item.name }</span>
+          <button type="button" className="btn btn-default" onClick={ this._handleDeleteIngredient }>-</button>
+        </div>
+      )
+    });
+
     return (
       <div id="recipeForm" className="center-center">
         <div>
@@ -112,10 +136,14 @@ export default class RecipeForm extends Component {
               <input name="amountUnit" className="form-control" type="text" placeholder="cookies, loaves, ect." />
             </div>
 
-            <div className="form-inline">
-              <input onChange={ this._handleChange } name="amount" className="form-control" type="number" placeholder="Amount" />
 
-              <select onChange={ this._handleChange } name="unit" className="form-control">
+            { listOfIngredients }
+
+            <div className="form-inline" onChange={ this._handleChange }>
+              <label>Add ingredient</label>
+              <input name="amount" className="form-control" type="number" placeholder="Amount" />
+
+              <select name="unit" className="form-control">
                 <option selected>Unit</option>
                 <option value="cups">Cups</option>
                 <option value="tsp">Tsp</option>
@@ -123,12 +151,13 @@ export default class RecipeForm extends Component {
                 <option value="dash">Dash</option>
               </select>
 
-              <input onChange={ this._handleChange } name="name" className="form-control" type="text" placeholder="Ingredient Name" />
+              <input name="name" className="form-control" type="text" placeholder="Ingredient Name" />
+
+              <button type="button" className="btn btn-default" onClick={ this._handleAddIngredient }>+</button>
+
             </div>
 
-
             <textarea onChange={ this._handleChange } name="directions" className="form-control" rows="3" placeholder="What directions go with this step?"></textarea>
-
 
             <button className="btn btn-default" type="button">Add Another Step</button>
 
